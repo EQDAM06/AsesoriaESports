@@ -5,6 +5,7 @@ import java.util.Objects;
 
 /**
  * Aquí va la documentación
+ *
  * @author David Roig
  * @author Isabel Montero
  */
@@ -15,10 +16,22 @@ public class Contrato {
     private Date fechaAlta;
     private Date fechaBaja = null;
 
-    public Contrato(Jugador jugador, Equipo equipo, Date fechaAlta) {
+    // Sobre date: en el momento que date es creado (new date()) se le da la fecha actual
+    public Contrato(Jugador jugador, Equipo equipo) {
         this.jugador = jugador;
         this.equipo = equipo;
-        this.fechaAlta = fechaAlta;
+        this.fechaAlta = new Date();
+    }
+
+    public void terminar() {
+        this.fechaBaja = new Date();
+    }
+
+    /**
+     * @return Devuelve true si el contrato no ha sido terminado
+     */
+    public boolean isActive() {
+        return (fechaBaja == null);
     }
 
     public int getId() {

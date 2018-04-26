@@ -13,8 +13,11 @@ public class Jornada {
     private List<Encuentro> encuentros;
     private int id;
 
-    public Jornada(Liga liga) {
+    public Jornada(Liga liga, List<Equipo> equipos, int dia) {
         this.liga = liga;
+        for (int i = 0; i < equipos.size(); i++) {
+
+        }
     }
 
     public Liga getLiga() {
