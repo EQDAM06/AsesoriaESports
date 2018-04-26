@@ -15,9 +15,7 @@ public class Jornada {
 
     public Jornada(Liga liga, List<Equipo> equipos, int dia) {
         this.liga = liga;
-        for (int i = 0; i < equipos.size(); i++) {
-
-        }
+        // TODO(Dave): Terminar método de aleatorización
     }
 
     public Liga getLiga() {

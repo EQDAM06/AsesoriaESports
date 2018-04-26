@@ -26,7 +26,7 @@ public class Equipo {
     }
 
     /**
-     * Función que añade jugadores al equipo, creando el Contrato en el momento
+     * Añade jugadores al equipo, creando el Contrato en el momento
      *
      * @param jugador Jugador a añadir
      */

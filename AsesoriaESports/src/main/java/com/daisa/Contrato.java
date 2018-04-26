@@ -16,7 +16,7 @@ public class Contrato {
     private Date fechaAlta;
     private Date fechaBaja = null;
 
-    // Sobre date: en el momento que date es creado (new date()) se le da la fecha actual
+    // Sobre date: en el momento que date es creado (new date()) le es dada la fecha actual
     public Contrato(Jugador jugador, Equipo equipo) {
         this.jugador = jugador;
         this.equipo = equipo;

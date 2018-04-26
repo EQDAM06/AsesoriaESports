@@ -25,30 +25,35 @@ public class LoginVentana {
         frame.getRootPane().setDefaultButton(entrarButton);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
         entrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String usuario = usuarioField.getText();
                 String password = DigestUtils.sha1Hex(new String(passwordField1.getPassword())); //encriptado
+
                 if (!usuario.equals("") || !usuario.equals("")) {
                     int tipoUsuario = login(usuario,password);
                     switch (tipoUsuario) {
-                        case 0:
+                        case 0: // Usuario normal
                             VentanaPrincipalUsuario ventanaPrincipalUsuario = new VentanaPrincipalUsuario(usuario, tipoUsuario);
                             ventanaPrincipalUsuario.mostrar();
                             frame.dispose();
                             break;
-                        case 1:
+
+                        case 1: // Director
                             ventanaPrincipalUsuario = new VentanaPrincipalUsuario(usuario, tipoUsuario);
                             ventanaPrincipalUsuario.mostrar();
                             frame.dispose();
                             break;
-                        case 2:
+
+                        case 2: // Administrador
                             VentanaPrincipalAdmin ventanaPrincipalAdmin = new VentanaPrincipalAdmin(usuario);
                             ventanaPrincipalAdmin.mostrar();
                             frame.dispose();
                             break;
-                        case -1:
+
+                        case -1: // Error
                             JOptionPane.showMessageDialog(frame,
                                     "Usuario o contraseña incorrectos.",
                                     "Error Autenticación",
@@ -63,9 +68,11 @@ public class LoginVentana {
     }
 
     /**
+     * Intenta hacer login usando los datos que se encuentran en la base de datos
+     *
      * @param usuario   el nombre de usuario
      * @param password  la contraseña encriptada
-     * @return -1 error; 0 usuario; 1 director; 2 administrador
+     * @return Tipo de usuario: -1 error, 0 usuario normal, 1 director, 2 administrador
      */
     private int login (String usuario, String password) {
         // TODO(Dave): lectura base de datos aquí

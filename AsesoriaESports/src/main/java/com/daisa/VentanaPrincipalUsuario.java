@@ -19,8 +19,8 @@ public class VentanaPrincipalUsuario {
     }
 
     /**
-     * @param usuario   el nombre de usuario
-     * @param tipoUsuario  0 usuario; 1 director
+     * @param usuario El nombre de usuario
+     * @param tipoUsuario El tipo de usuario: 0 usuario normal, 1 director
      */
     public VentanaPrincipalUsuario(String usuario, int tipoUsuario) {
         this.usuario = usuario;

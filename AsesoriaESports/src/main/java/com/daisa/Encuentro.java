@@ -11,7 +11,7 @@ public class Encuentro {
     private int id;
     private Jornada jornada;
     private int ganador;
-    private Equipo[] equipos = new Equipo[2];
+    private Equipo[] equipos;
     private Liga liga;
 
     public Encuentro(Jornada jornada, int ganador, Equipo[] equipos, Liga liga) {
