@@ -1,11 +1,10 @@
 package com.daisa;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Aquí va la documentación
+ *
  * @author David Roig
  * @author Isabel Montero
  */
@@ -18,11 +17,35 @@ public class Liga {
     private List<Puntuacion> puntuaciones;
     private List<Jornada> jornadas;
 
-    public Liga(String nombre, Date fechaInicio, boolean terminado, List<Equipo> equipos) {
-        this.nombre = nombre;
-        this.fechaInicio = fechaInicio;
-        this.terminado = terminado;
-        this.equipos = equipos;
+    public Liga(String nombre, Date fechaInicio, List<Equipo> equipos) {
+        if (equipos.size() % 2 == 0) { // Nos aseguramos de nuevo de que el número de equipos sea par
+            this.nombre = nombre;
+            this.fechaInicio = fechaInicio;
+            this.equipos = equipos;
+
+            int sorteo[] = new int[equipos.size()];
+            Arrays.fill(sorteo, -1);
+            Random rand = new Random();
+            for (int i = 0; i < equipos.size(); i++) {
+                while (sorteo[i] == -1) {
+                    int n = rand.nextInt(equipos.size() - 1);
+                    int j = 0;
+                    while ((j <= i) && sorteo[j] != n) {
+                        if (j == i) {
+                            sorteo[i] = n;
+                        } else j++;
+                    }
+                }
+            }
+            List<Equipo> equiposSorteados = new ArrayList<>();
+            for (int i = 0; i < equipos.size(); i++) {
+                equiposSorteados.add(equipos.get(sorteo[i]));
+            }
+
+            for (int i = 0; i < equipos.size() - 1; i++) {
+                jornadas.add(new Jornada(this, equiposSorteados,i+1));
+            }
+        }
     }
 
     public int getId() {

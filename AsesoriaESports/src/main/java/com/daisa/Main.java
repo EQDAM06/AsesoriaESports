@@ -7,6 +7,6 @@ package com.daisa;
  */
 public class Main {
     public static void main(String[] args) {
-
+        LoginVentana loginVentana = new LoginVentana();
     }
 }
