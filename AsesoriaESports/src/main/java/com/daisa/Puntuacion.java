@@ -3,27 +3,20 @@ package com.daisa;
 import java.util.Objects;
 
 /**
- * Aquí va la documentación
+ * Clase Puntuacion, que liga Equipos y Ligas.
  * @author David Roig
  * @author Isabel Montero
  */
 public class Puntuacion {
-        private int id;
         private Equipo equipo;
         private Liga liga;
         private int puntos = 0;
 
-    public Puntuacion(Equipo equipo, Liga liga) {
+
+    public Puntuacion(Equipo equipo, Liga liga, int puntos) {
         this.equipo = equipo;
         this.liga = liga;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.puntos = puntos;
     }
 
     public Equipo getEquipo() {
@@ -55,12 +48,13 @@ public class Puntuacion {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Puntuacion that = (Puntuacion) o;
-        return id == that.id;
+        return Objects.equals(equipo, that.equipo) &&
+                Objects.equals(liga, that.liga);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id);
+        return Objects.hash(equipo, liga);
     }
 }

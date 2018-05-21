@@ -1,9 +1,12 @@
 package com.daisa;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
- * Aquí va la documentación
+ * Clase Jugador.
+ *
  * @author David Roig
  * @author Isabel Montero
  */
@@ -14,7 +17,7 @@ public class Jugador {
     private double sueldo;
     private String telefono;
     private Equipo equipo;
-    private Contrato contrato;
+    private List<Contrato> contratos;
 
     public Jugador(String dni, String nombre, String nickname, double sueldo, String telefono) {
         this.dni = dni;
@@ -22,6 +25,7 @@ public class Jugador {
         this.nickname = nickname;
         this.sueldo = sueldo;
         this.telefono = telefono;
+        contratos = new ArrayList<>();
     }
 
     public String getDni() {
@@ -72,12 +76,8 @@ public class Jugador {
         this.equipo = equipo;
     }
 
-    public Contrato getContrato() {
-        return contrato;
-    }
-
-    public void setContrato(Contrato contrato) {
-        this.contrato = contrato;
+    public List<Contrato> getContratos() {
+        return contratos;
     }
 
     @Override
@@ -92,5 +92,16 @@ public class Jugador {
     public int hashCode() {
 
         return Objects.hash(dni);
+    }
+
+    /**
+     * Devuelve el contrato actual.
+     * @return Contrato cuya fecha de baja todavía está sin poner.
+     */
+    public Contrato getContratoVigente() {
+        for (Contrato contrato:contratos) {
+            if (contrato.getFechaBaja() == null) return contrato;
+        }
+        return null;
     }
 }

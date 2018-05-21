@@ -3,7 +3,7 @@ package com.daisa;
 import java.util.Objects;
 
 /**
- * Aquí va la documentación
+ * Clase Encuentro, perteneciente a Jornada.
  * @author David Roig
  * @author Isabel Montero
  */
@@ -11,10 +11,18 @@ public class Encuentro {
     private int id;
     private Jornada jornada;
     private int ganador;
-    private Equipo[] equipos = new Equipo[2];
+    private Equipo[] equipos;
     private Liga liga;
 
-    public Encuentro(Jornada jornada, int ganador, Equipo[] equipos, Liga liga) {
+
+    public Encuentro(Jornada jornada, Liga liga) {
+        this.jornada = jornada;
+        this.liga = liga;
+    }
+
+
+    public Encuentro(int id, Jornada jornada, int ganador, Equipo[] equipos, Liga liga) {
+        this.id = id;
         this.jornada = jornada;
         this.ganador = ganador;
         this.equipos = equipos;
@@ -49,8 +57,8 @@ public class Encuentro {
         return equipos;
     }
 
-    public void setEquipos(Equipo[] equipos) {
-        this.equipos = equipos;
+    public void setEquipos(Equipo equipo1, Equipo equipo2) {
+        this.equipos = new Equipo[] {equipo1,equipo2};
     }
 
     public Liga getLiga() {

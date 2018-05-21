@@ -2,39 +2,35 @@ package com.daisa;
 
 import java.util.Objects;
 
+/**
+ * Clase de Usuario, sin contener la contraseña.
+ *
+ * @author David Roig
+ * @author Isabel Montero
+ */
 public class Usuario {
-    private String username;
-    private String password;
-    private String tipoLogin;
+    private String id;
+    private String tipoUsuario;
 
-    public Usuario(String username, String password, String tipoLogin) {
-        this.username = username;
-        this.password = password;
-        this.tipoLogin = tipoLogin;
+    public Usuario(String id, String tipoUsuario) {
+        this.id = id;
+        this.tipoUsuario = tipoUsuario;
     }
 
-    public String getUsername() {
-        return username;
+    public String getId() {
+        return id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getPassword() {
-        return password;
+    public String getTipoUsuario() {
+        return tipoUsuario;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getTipoLogin() {
-        return tipoLogin;
-    }
-
-    public void setTipoLogin(String tipoLogin) {
-        this.tipoLogin = tipoLogin;
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     @Override
@@ -42,12 +38,12 @@ public class Usuario {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return Objects.equals(username, usuario.username);
+        return Objects.equals(id, usuario.id);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(username);
+        return Objects.hash(id);
     }
 }

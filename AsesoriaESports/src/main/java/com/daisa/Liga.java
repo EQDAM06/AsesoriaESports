@@ -1,28 +1,68 @@
 package com.daisa;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
- * Aquí va la documentación
+ * Clase Liga, que contiene Jornadas.
+ *
  * @author David Roig
  * @author Isabel Montero
  */
 public class Liga {
     private int id;
     private String nombre;
-    private Date fechaInicio;
+    private String fechaInicio;
     private boolean terminado = false;
     private List<Equipo> equipos;
     private List<Puntuacion> puntuaciones;
     private List<Jornada> jornadas;
 
-    public Liga(String nombre, Date fechaInicio, boolean terminado, List<Equipo> equipos) {
+    public Liga(String nombre, String fechaInicio, List<Equipo> equipos, boolean terminado) {
+        this.nombre = nombre;
+        this.fechaInicio = fechaInicio;
+        this.equipos = equipos;
+        this.terminado = terminado;
+        this.jornadas = new ArrayList<>();
+        this.puntuaciones = new ArrayList<>();
+    }
+
+    public Liga(int id, String nombre, String fechaInicio, boolean terminado) {
+        this.id = id;
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.terminado = terminado;
-        this.equipos = equipos;
+        this.equipos = new ArrayList<>();
+        this.jornadas = new ArrayList<>();
+        this.puntuaciones = new ArrayList<>();
+    }
+
+    public Liga(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * Crea las jornadas y los encuentros de la liga
+     */
+    public void crearJornadas() {
+        ArrayList<Jornada> jornadas = new ArrayList<>();
+
+        int numEquipos = equipos.size();
+
+        for (int i = 0; i < numEquipos-1; i++) {
+
+            ArrayList<Encuentro> encuentros = new ArrayList<>();
+            Jornada jornada = new Jornada(this, i+1);
+
+            for (int j = i+1; j < numEquipos; j++) {
+                Encuentro encuentro = new Encuentro(jornada,this);
+                encuentro.setEquipos(equipos.get(i), equipos.get(j));
+                encuentros.add(encuentro);
+            }
+            jornada.setEncuentros(encuentros);
+            jornadas.add(jornada);
+        }
+
+        this.jornadas = jornadas;
     }
 
     public int getId() {
@@ -33,6 +73,14 @@ public class Liga {
         this.id = id;
     }
 
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -41,12 +89,8 @@ public class Liga {
         this.nombre = nombre;
     }
 
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
 
     public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
     }
 
     public boolean isTerminado() {
@@ -94,4 +138,5 @@ public class Liga {
 
         return Objects.hash(id);
     }
+
 }
