@@ -1,10 +1,9 @@
 package com.daisa;
 
-import java.util.Date;
 import java.util.Objects;
 
 /**
- * Aquí va la documentación
+ * Clase para los contratos que vinculan a un jugador y su equipo.
  *
  * @author David Roig
  * @author Isabel Montero
@@ -13,25 +12,15 @@ public class Contrato {
     private int id;
     private Jugador jugador;
     private Equipo equipo;
-    private Date fechaAlta;
-    private Date fechaBaja = null;
+    private String fechaAlta;
+    private String fechaBaja;
 
-    // Sobre date: en el momento que date es creado (new date()) le es dada la fecha actual
-    public Contrato(Jugador jugador, Equipo equipo) {
+    public Contrato(int idContrato, Jugador jugador, Equipo equipo, String fechaAlta, String fechaBaja) {
+        id = idContrato;
         this.jugador = jugador;
         this.equipo = equipo;
-        this.fechaAlta = new Date();
-    }
-
-    public void terminar() {
-        this.fechaBaja = new Date();
-    }
-
-    /**
-     * @return Devuelve true si el contrato no ha sido terminado
-     */
-    public boolean isActive() {
-        return (fechaBaja == null);
+        this.fechaAlta = fechaAlta;
+        this.fechaBaja = fechaBaja;
     }
 
     public int getId() {
@@ -58,19 +47,19 @@ public class Contrato {
         this.equipo = equipo;
     }
 
-    public Date getFechaAlta() {
+    public String getFechaAlta() {
         return fechaAlta;
     }
 
-    public void setFechaAlta(Date fechaAlta) {
+    public void setFechaAlta(String fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
-    public Date getFechaBaja() {
+    public String getFechaBaja() {
         return fechaBaja;
     }
 
-    public void setFechaBaja(Date fechaBaja) {
+    public void setFechaBaja(String fechaBaja) {
         this.fechaBaja = fechaBaja;
     }
 

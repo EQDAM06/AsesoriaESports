@@ -1,21 +1,31 @@
 package com.daisa;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Aquí va la documentación
+ * Clase Jornada, perteneciente a una Liga y que contiene Encuentros.
+ *
  * @author David Roig
  * @author Isabel Montero
  */
 public class Jornada {
     private Liga liga;
     private List<Encuentro> encuentros;
+    private int dia;
     private int id;
 
-    public Jornada(Liga liga, List<Equipo> equipos, int dia) {
+    public Jornada(Liga liga, int dia) {
         this.liga = liga;
-        // TODO(Dave): Terminar método de aleatorización
+        this.dia = dia;
+    }
+
+    public Jornada(Liga liga, int id, int dia) {
+        this.liga = liga;
+        this.dia = dia;
+        this.id = id;
+        encuentros = new ArrayList<>();
     }
 
     public Liga getLiga() {
@@ -40,6 +50,14 @@ public class Jornada {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getDia() {
+        return dia;
+    }
+
+    public void setDia(int dia) {
+        this.dia = dia;
     }
 
     @Override

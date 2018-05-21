@@ -3,7 +3,7 @@ package com.daisa;
 import java.util.*;
 
 /**
- * Aquí va la documentación
+ * Clase Liga, que contiene Jornadas.
  *
  * @author David Roig
  * @author Isabel Montero
@@ -11,48 +11,58 @@ import java.util.*;
 public class Liga {
     private int id;
     private String nombre;
-    private Date fechaInicio;
+    private String fechaInicio;
     private boolean terminado = false;
     private List<Equipo> equipos;
     private List<Puntuacion> puntuaciones;
     private List<Jornada> jornadas;
 
+    public Liga(String nombre, String fechaInicio, List<Equipo> equipos, boolean terminado) {
+        this.nombre = nombre;
+        this.fechaInicio = fechaInicio;
+        this.equipos = equipos;
+        this.terminado = terminado;
+        this.jornadas = new ArrayList<>();
+        this.puntuaciones = new ArrayList<>();
+    }
+
+    public Liga(int id, String nombre, String fechaInicio, boolean terminado) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fechaInicio = fechaInicio;
+        this.terminado = terminado;
+        this.equipos = new ArrayList<>();
+        this.jornadas = new ArrayList<>();
+        this.puntuaciones = new ArrayList<>();
+    }
+
+    public Liga(String nombre) {
+        this.nombre = nombre;
+    }
+
     /**
-     * Crea la liga, creando a la vez el calendario aleatorizado de encuentros
-     *
-     * @param nombre Nombre de la liga
-     * @param fechaInicio Fecha de inicio de la liga
-     * @param equipos Equipos que van a participar en la liga. Debe ser un número par.
+     * Crea las jornadas y los encuentros de la liga
      */
-    public Liga(String nombre, Date fechaInicio, List<Equipo> equipos) {
-        if (equipos.size() % 2 == 0) { // Nos aseguramos de nuevo de que el número de equipos sea par
-            this.nombre = nombre;
-            this.fechaInicio = fechaInicio;
-            this.equipos = equipos;
+    public void crearJornadas() {
+        ArrayList<Jornada> jornadas = new ArrayList<>();
 
-            int sorteo[] = new int[equipos.size()]; // Este array va a determinar el orden inicial de los equipos
-            Arrays.fill(sorteo, -1);
-            Random rand = new Random();
-            for (int i = 0; i < equipos.size(); i++) { // Aleatorizar cosas sin repetirse es complicado
-                while (sorteo[i] == -1) {
-                    int n = rand.nextInt(equipos.size() - 1);
-                    int j = 0;
-                    while ((j <= i) && sorteo[j] != n) {
-                        if (j == i) {
-                            sorteo[i] = n;
-                        } else j++;
-                    }
-                }
-            }
-            List<Equipo> equiposSorteados = new ArrayList<>(); // Creamos una lista usando el orden del sorteo
-            for (int i = 0; i < equipos.size(); i++) {
-                equiposSorteados.add(equipos.get(sorteo[i]));
-            }
+        int numEquipos = equipos.size();
 
-            for (int i = 0; i < equipos.size() - 1; i++) { // Creamos las jornadas
-                jornadas.add(new Jornada(this, equiposSorteados, i + 1)); // El día determina los encuentros
+        for (int i = 0; i < numEquipos-1; i++) {
+
+            ArrayList<Encuentro> encuentros = new ArrayList<>();
+            Jornada jornada = new Jornada(this, i+1);
+
+            for (int j = i+1; j < numEquipos; j++) {
+                Encuentro encuentro = new Encuentro(jornada,this);
+                encuentro.setEquipos(equipos.get(i), equipos.get(j));
+                encuentros.add(encuentro);
             }
-        } else System.err.println("El número de equipos añadidos no es par.");
+            jornada.setEncuentros(encuentros);
+            jornadas.add(jornada);
+        }
+
+        this.jornadas = jornadas;
     }
 
     public int getId() {
@@ -63,6 +73,14 @@ public class Liga {
         this.id = id;
     }
 
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -71,12 +89,8 @@ public class Liga {
         this.nombre = nombre;
     }
 
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
 
     public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
     }
 
     public boolean isTerminado() {
@@ -124,4 +138,5 @@ public class Liga {
 
         return Objects.hash(id);
     }
+
 }

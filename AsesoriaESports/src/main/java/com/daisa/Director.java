@@ -1,10 +1,11 @@
 package com.daisa;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Aquí va la documentación
+ * Clase Director.
  * @author David Roig
  * @author Isabel Montero
  */
@@ -14,12 +15,15 @@ public class Director {
     private String telefono;
     private String email;
     private List<Equipo> equipos;
+    private String idUsuario;
 
-    public Director(String dni, String nombre, String telefono, String email) {
+    public Director(String dni, String nombre, String telefono, String email, String idUsuario) {
         this.dni = dni;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
+        this.idUsuario = idUsuario;
+        equipos = new ArrayList<>();
     }
 
     public String getDni() {
@@ -60,6 +64,14 @@ public class Director {
 
     public void setEquipos(List<Equipo> equipos) {
         this.equipos = equipos;
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override
